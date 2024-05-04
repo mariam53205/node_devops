@@ -58,7 +58,7 @@ stage('Build application') {
         }
       }
     }
-
+//mychange
 
         //  Uploading Docker images into Nexus Registry
     stage('Deploy  to Nexus') {
