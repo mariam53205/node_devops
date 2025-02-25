@@ -26,10 +26,17 @@ stage('Unit Test') {
         }
       }
     }
-withSonarQubeEnv('scanner') { 
-    sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=nodeapp -Dsonar.sources=."
-}
 
+   stage('SonarQube Analysis') { 
+steps{ 
+script {   
+def scannerHome = tool 'scanner' 
+withSonarQubeEnv { 
+sh "${scannerHome}/bin/sonar-scanner" 
+} 
+}  
+}   
+} 
 
 stage('Build application') {
       steps{
