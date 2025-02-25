@@ -27,17 +27,17 @@ stage('Unit Test') {
       }
     }
 
-    stage('SonarQube Analysis') {
-      steps{
-      script {  
-                    def scannerHome = tool 'scanner'
-                    withSonarQubeEnv {
-                    sh "${scannerHome}/bin/sonar-scanner"
-                        }
-                } 
-              }  
+  stage('SonarQube Analysis') {
+    steps {
+        script {
+            // Ensure 'scanner' matches the name configured in Jenkins
+            def scannerHome = tool 'scanner'
+            withSonarQubeEnv('SonarQube') { // Ensure 'SonarQube' matches the server name in Jenkins
+                sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=nodeapp -Dsonar.sources=."
             }
-
+        }
+    }
+}
 stage('Build application') {
       steps{
         
