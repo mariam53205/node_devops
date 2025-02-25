@@ -54,7 +54,7 @@ stage('Build application') {
       steps{
         
         script {
-         sh('docker-compose build --build-arg NPM_REGISTRY=https://registry.npm.taobao.org')
+         sh('docker-compose build')
         }
       }
     }
